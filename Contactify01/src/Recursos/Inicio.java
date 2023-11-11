@@ -1,22 +1,14 @@
 
 package co.edu.unicolombo.pb;
 
-import Conexion.conexionSQL;
-import com.mysql.jdbc.Statement;
 import java.awt.Color;
-import java.sql.Connection;
-import javax.swing.JOptionPane;
-import java.sql.ResultSet;
+
 
 public class Inicio extends javax.swing.JFrame {
-    
-    conexionSQL cc=new conexionSQL();
-    Connection ubd=cc.conexion();
-    
+
     int xMouse, yMouse; 
     public Inicio() {
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -44,8 +36,6 @@ public class Inicio extends javax.swing.JFrame {
         barraSuperior = new javax.swing.JPanel();
         EntrBtn = new javax.swing.JPanel();
         EntrTxt = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        registroTxt = new javax.swing.JLabel();
 
         jLabel7.setText("jLabel7");
 
@@ -80,18 +70,23 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel6.setText("Contraseña");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/fondo-pinceladas-azules.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 0, 170, 310));
 
-        Usertxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        Usertxt.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         Usertxt.setForeground(new java.awt.Color(204, 204, 204));
         Usertxt.setText("Ingrese su nombre de usuario");
         Usertxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 UsertxtMousePressed(evt);
+            }
+        });
+        Usertxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsertxtActionPerformed(evt);
             }
         });
         jPanel1.add(Usertxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 240, -1));
@@ -112,7 +107,7 @@ public class Inicio extends javax.swing.JFrame {
                 ContraseñatxtActionPerformed(evt);
             }
         });
-        jPanel1.add(Contraseñatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 240, -1));
+        jPanel1.add(Contraseñatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 240, -1));
 
         ExitButton.setBackground(new java.awt.Color(255, 255, 255));
         ExitButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -202,9 +197,6 @@ public class Inicio extends javax.swing.JFrame {
         EntrTxt.setText("ENTRAR");
         EntrTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         EntrTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EntrTxtMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 EntrTxtMouseEntered(evt);
             }
@@ -228,57 +220,17 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(EntrBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 100, 30));
-
-        jLabel9.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jLabel9.setText("¿No tienes una cuenta?");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
-
-        registroTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        registroTxt.setForeground(new java.awt.Color(51, 51, 255));
-        registroTxt.setText("Registrarse");
-        registroTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registroTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registroTxtMouseClicked(evt);
-            }
-        });
-        jPanel1.add(registroTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
+        jPanel1.add(EntrBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 100, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 310));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void ValidarUsuario(){
-       
-        int resultado=0;
-        String pass = String.valueOf(Contraseñatxt.getPassword());
-        String usuario = Usertxt.getText();
-        String SQL = "select * from usuarios where usuario = '"+usuario+"' and contraseña='"+pass+"'";
-        
-        try{
-            
-            Statement st=(Statement) ubd.createStatement();
-            ResultSet rs=st.executeQuery(SQL);
-            if (rs.next()){
-                
-                resultado=1;
-                
-                if(resultado==1){
-                    Contac cnt = new Contac();
-                    cnt.setVisible(true);
-                    this.setVisible(false);
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "Error de acceso, usuario no registrado");
-            }
-            
-            
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error" +e.getMessage());
-        }
-    }
-        
+
+    private void UsertxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsertxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsertxtActionPerformed
+
     private void barraSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraSuperiorMousePressed
         xMouse = evt.getX();
         yMouse = evt.getY(); 
@@ -350,16 +302,6 @@ public class Inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ContraseñatxtMousePressed
 
-    private void registroTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registroTxtMouseClicked
-        Register registro = new Register();
-        registro.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_registroTxtMouseClicked
-
-    private void EntrTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrTxtMouseClicked
-        ValidarUsuario();
-    }//GEN-LAST:event_EntrTxtMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -388,8 +330,10 @@ public class Inicio extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Inicio().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Inicio().setVisible(true);
+            }
         });
     }
 
@@ -409,8 +353,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel registroTxt;
     // End of variables declaration//GEN-END:variables
 }
