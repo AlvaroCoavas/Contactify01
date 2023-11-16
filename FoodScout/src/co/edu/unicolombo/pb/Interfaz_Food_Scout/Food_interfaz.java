@@ -16,6 +16,7 @@ public class Food_interfaz extends javax.swing.JFrame {
      */
     public Food_interfaz() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
