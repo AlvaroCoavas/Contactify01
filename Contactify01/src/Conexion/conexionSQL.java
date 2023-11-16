@@ -20,7 +20,7 @@ public class conexionSQL {
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            conectar = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/foodscout", "root", "");
+            conectar = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/contactify", "root", "");
             
             
         }catch(Exception e){
