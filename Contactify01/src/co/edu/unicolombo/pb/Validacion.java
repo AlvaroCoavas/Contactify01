@@ -5,6 +5,7 @@
 package co.edu.unicolombo.pb;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,7 +51,7 @@ public class Validacion extends javax.swing.JFrame {
                 passTxtActionPerformed(evt);
             }
         });
-        jPanel2.add(passTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 340, -1));
+        jPanel2.add(passTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 340, -1));
 
         jLabel1.setFont(new java.awt.Font("Roboto Light", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -97,7 +98,7 @@ public class Validacion extends javax.swing.JFrame {
                 .addComponent(VolTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(VolBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 100, 30));
+        jPanel2.add(VolBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 100, 30));
 
         EntrBtn1.setBackground(new java.awt.Color(46, 49, 146));
         EntrBtn1.setForeground(new java.awt.Color(220, 249, 255));
@@ -139,11 +140,11 @@ public class Validacion extends javax.swing.JFrame {
                 .addComponent(EntrTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(EntrBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 100, 30));
+        jPanel2.add(EntrBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 100, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
         jLabel2.setText("Ingrese la contraseña de acceso ");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,7 +154,7 @@ public class Validacion extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
         );
 
         pack();
@@ -182,7 +183,15 @@ public class Validacion extends javax.swing.JFrame {
     }//GEN-LAST:event_passTxtActionPerformed
 
     private void EntrTxt1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrTxt1MouseClicked
+        String pass = String.valueOf(passTxt.getPassword());
         
+        if(pass.equals("CVBNMJ258")){
+            Register reg = new Register();
+            reg.setVisible(true);
+            this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "La contraseña de acceso es incorrecta, consulte con personal administrativo");
+        }
     }//GEN-LAST:event_EntrTxt1MouseClicked
 
     private void EntrTxt1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrTxt1MouseEntered

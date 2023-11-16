@@ -29,6 +29,7 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
+        jScrollBar1 = new javax.swing.JScrollBar();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -55,15 +56,15 @@ public class Inicio extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/IconoMedio_3.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/LogoM (1).png"))); // NOI18N
         jLabel5.setMaximumSize(new java.awt.Dimension(72, 72));
         jLabel5.setMinimumSize(new java.awt.Dimension(72, 72));
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 120, 100));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 120, 110));
 
         jLabel4.setFont(new java.awt.Font("Roboto Light", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 0, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Contactify");
+        jLabel4.setText("FoodScout");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 120, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -75,8 +76,8 @@ public class Inicio extends javax.swing.JFrame {
         jLabel2.setText("Bienvenido");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 100, 30));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icon1.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 30, 30));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/LogoM (2).png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 40, 40));
 
         jLabel6.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel6.setText("Contraseña");
@@ -351,8 +352,8 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_ContraseñatxtMousePressed
 
     private void registroTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registroTxtMouseClicked
-        Register registro = new Register();
-        registro.setVisible(true);
+        Validacion val = new Validacion();
+        val.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_registroTxtMouseClicked
 
@@ -411,6 +412,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JLabel registroTxt;
     // End of variables declaration//GEN-END:variables
 }

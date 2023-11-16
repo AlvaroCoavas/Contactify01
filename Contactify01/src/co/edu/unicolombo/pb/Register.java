@@ -34,6 +34,7 @@ public class Register extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        registroTxt = new javax.swing.JLabel();
         RgsUser = new javax.swing.JTextField();
         RgsPass = new javax.swing.JPasswordField();
         RgsBtn = new javax.swing.JPanel();
@@ -54,6 +55,16 @@ public class Register extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Registro de Usuario");
 
+        registroTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        registroTxt.setForeground(new java.awt.Color(255, 255, 255));
+        registroTxt.setText("Volver");
+        registroTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registroTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registroTxtMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -63,15 +74,22 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(registroTxt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(registroTxt)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -158,13 +176,20 @@ public class Register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     public void AgregarUsuario(){
-       
-        String SQL = "insert into usuarios values(?,?,?)";
         
+        String SQL = "insert into usuarios values(?,?,?)";
+        String pass = String.valueOf(RgsPass.getPassword());
+        String user = RgsUser.getText();
+        
+        if(user.equals("Username")||pass.equals("************")){
+            JOptionPane.showMessageDialog(null, "Debe rellenar los campos");
+        }else if(user.equals("")||pass.equals("")){
+            JOptionPane.showMessageDialog(null, "Debe rellenar los campos");
+        }else{
         try{
             
             PreparedStatement pat = ubd.prepareStatement(SQL);
-            String pass = String.valueOf(RgsPass.getPassword());
+
             
             pat.setString(1, "0");
             pat.setString(2, RgsUser.getText().trim());
@@ -179,7 +204,7 @@ public class Register extends javax.swing.JFrame {
         Inicio inc = new Inicio();
         inc.setVisible(true);
         this.setVisible(false);
-         
+        }
     }
     private void RgsUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RgsUserActionPerformed
         // TODO add your handling code here:
@@ -223,6 +248,12 @@ public class Register extends javax.swing.JFrame {
     private void RgsBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RgsBtnMouseClicked
         AgregarUsuario();
     }//GEN-LAST:event_RgsBtnMouseClicked
+
+    private void registroTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registroTxtMouseClicked
+        Inicio init = new Inicio();
+        init.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_registroTxtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -268,5 +299,6 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel registroTxt;
     // End of variables declaration//GEN-END:variables
 }
