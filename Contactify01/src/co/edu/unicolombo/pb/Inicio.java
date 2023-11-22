@@ -12,13 +12,15 @@ public class Inicio extends javax.swing.JFrame {
     
     conexionSQL cc=new conexionSQL();
     Connection ubd=cc.conexion();
-    
     int xMouse, yMouse; 
+    
     public Inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,11 +35,11 @@ public class Inicio extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        Usertxt = new javax.swing.JTextField();
+        txt_user = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         Contraseñatxt = new javax.swing.JPasswordField();
         ExitButton = new javax.swing.JPanel();
@@ -71,6 +73,10 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/fondo-pinceladas-azules.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 0, 170, 310));
+
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Bienvenido");
@@ -83,19 +89,21 @@ public class Inicio extends javax.swing.JFrame {
         jLabel6.setText("Contraseña");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/fondo-pinceladas-azules.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 0, 170, 310));
-
-        Usertxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        Usertxt.setForeground(new java.awt.Color(204, 204, 204));
-        Usertxt.setText("Ingrese su nombre de usuario");
-        Usertxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                UsertxtMousePressed(evt);
+        txt_user.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        txt_user.setForeground(new java.awt.Color(204, 204, 204));
+        txt_user.setText("Ingrese su nombre de usuario");
+        txt_user.setNextFocusableComponent(barraSuperior);
+        txt_user.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_userFocusLost(evt);
             }
         });
-        jPanel1.add(Usertxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 240, -1));
+        txt_user.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txt_userMousePressed(evt);
+            }
+        });
+        jPanel1.add(txt_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 240, -1));
 
         jLabel8.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel8.setText("Usuario");
@@ -103,6 +111,11 @@ public class Inicio extends javax.swing.JFrame {
 
         Contraseñatxt.setForeground(new java.awt.Color(204, 204, 204));
         Contraseñatxt.setText("***************");
+        Contraseñatxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ContraseñatxtFocusLost(evt);
+            }
+        });
         Contraseñatxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 ContraseñatxtMousePressed(evt);
@@ -165,6 +178,7 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.add(ExitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 30));
 
         barraSuperior.setBackground(new java.awt.Color(255, 255, 255));
+        barraSuperior.setNextFocusableComponent(jLabel6);
         barraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 barraSuperiorMouseDragged(evt);
@@ -250,11 +264,12 @@ public class Inicio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
     public void ValidarUsuario(){
        
         int resultado=0;
         String pass = String.valueOf(Contraseñatxt.getPassword());
-        String usuario = Usertxt.getText();
+        String usuario = txt_user.getText();
         String SQL = "select * from usuarios where usuario = '"+usuario+"' and contraseña='"+pass+"'";
         
         try{
@@ -266,7 +281,8 @@ public class Inicio extends javax.swing.JFrame {
                 resultado=1;
                 
                 if(resultado==1){
-                    Contac cnt = new Contac();
+                    Interfaz1 cnt = new Interfaz1();
+                    cnt.setDato(txt_user.getText());
                     cnt.setVisible(true);
                     this.setVisible(false);
                 }
@@ -329,25 +345,25 @@ public class Inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ContraseñatxtActionPerformed
 
-    private void UsertxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsertxtMousePressed
-        if (Usertxt.getText().equals("Ingrese su nombre de usuario")) {
-            Usertxt.setText("");
-            Usertxt.setForeground(Color.black);
+    private void txt_userMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_userMousePressed
+        if (txt_user.getText().equals("Ingrese su nombre de usuario")) {
+            txt_user.setText("");
+            txt_user.setForeground(Color.black);
         }
         if (String.valueOf(Contraseñatxt.getPassword()).isEmpty()) {
             Contraseñatxt.setText("***************");
             Contraseñatxt.setForeground(Color.gray);
         }
-    }//GEN-LAST:event_UsertxtMousePressed
+    }//GEN-LAST:event_txt_userMousePressed
 
     private void ContraseñatxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContraseñatxtMousePressed
         if (String.valueOf(Contraseñatxt.getPassword()).equals("***************")) {
             Contraseñatxt.setText("");
             Contraseñatxt.setForeground(Color.black);
         }
-        if (Usertxt.getText().isEmpty()) {
-            Usertxt.setText("Ingrese su nombre de usuario");
-            Usertxt.setForeground(Color.gray);
+        if (txt_user.getText().isEmpty()) {
+            txt_user.setText("Ingrese su nombre de usuario");
+            txt_user.setForeground(Color.gray);
         }
     }//GEN-LAST:event_ContraseñatxtMousePressed
 
@@ -360,6 +376,14 @@ public class Inicio extends javax.swing.JFrame {
     private void EntrTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrTxtMouseClicked
         ValidarUsuario();
     }//GEN-LAST:event_EntrTxtMouseClicked
+
+    private void txt_userFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_userFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_userFocusLost
+
+    private void ContraseñatxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContraseñatxtFocusLost
+        
+    }//GEN-LAST:event_ContraseñatxtFocusLost
 
     /**
      * @param args the command line arguments
@@ -400,7 +424,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel EntrTxt;
     private javax.swing.JPanel ExitButton;
     private javax.swing.JLabel ExitTxt;
-    private javax.swing.JTextField Usertxt;
     private javax.swing.JPanel barraSuperior;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -414,5 +437,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JLabel registroTxt;
+    public javax.swing.JTextField txt_user;
     // End of variables declaration//GEN-END:variables
 }
